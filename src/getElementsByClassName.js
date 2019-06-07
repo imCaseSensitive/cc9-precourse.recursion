@@ -10,6 +10,23 @@
   But we don't like easy! So we'll make you write your own.
 */
 
-const getElementsByClassName = () => {
-  // YOUR CODE HERE
+const getElementsByClassName = (string) => {
+  let matches = [];
+
+  function godlyRecurse(html, targetClassName) {
+    let currentNode = html;
+    
+    if (currentNode.childNodes.length > 0) {
+      currentNode.childNodes.forEach(node => {
+        if (node.className === targetClassName) {
+          matches.push(node);
+        }
+        if (node.childNodes.length > 0) {
+          godlyRecurse(node, targetClassName);
+        }
+      })
+    }
+  }
+  godlyRecurse(document.documentElement, string);
+  return matches;
 };
