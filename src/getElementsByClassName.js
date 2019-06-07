@@ -15,10 +15,10 @@ const getElementsByClassName = (string) => {
 
   function godlyRecurse(html, targetClassName) {
     let currentNode = html;
-    
+
     if (currentNode.childNodes.length > 0) {
       currentNode.childNodes.forEach(node => {
-        if (node.className === targetClassName) {
+        if (node.className && node.className.split(' ').includes(targetClassName)) {
           matches.push(node);
         }
         if (node.childNodes.length > 0) {
