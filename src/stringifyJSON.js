@@ -6,12 +6,19 @@ What does the output for stringifyJSON look like? Play around with JSON.stringif
 
 */
 
-const stringifyJSON = (object) => {
-  if (typeof object === "string") {
-    return  `"${object}"`;
+const stringifyJSON = (stringifyMe) => {
+  if (typeof stringifyMe === "string") {
+    return  `"${stringifyMe}"`;
   }
-  if (Array.isArray(object) === true) {
-    return '[' + ']';
+  else if (Array.isArray(stringifyMe) === true) {
+    let stringifiedArray = [];
+    for (let i = 0; i < stringifyMe.length; i++) {
+      stringifiedArray.push(stringifyJSON(stringifyMe[i]))
+    }
+    return '[' + stringifiedArray.join(',') + ']';
   }
-  return `${object}`;
+  else {
+    return `${stringifyMe}`;
+  }
+
 };
