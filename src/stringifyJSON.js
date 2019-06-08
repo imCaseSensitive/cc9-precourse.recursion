@@ -7,7 +7,10 @@ What does the output for stringifyJSON look like? Play around with JSON.stringif
 */
 
 const stringifyJSON = (stringifyMe) => {
-  if (typeof stringifyMe === "string") {
+  if (stringifyMe === null) {
+    return 'null';
+  }
+  else if (typeof stringifyMe === "string") {
     return  `"${stringifyMe}"`;
   }
   else if (Array.isArray(stringifyMe) === true) {
@@ -16,6 +19,9 @@ const stringifyJSON = (stringifyMe) => {
       stringifiedArray.push(stringifyJSON(stringifyMe[i]))
     }
     return '[' + stringifiedArray.join(',') + ']';
+  }
+  else if (stringifyMe.constructor === Object && stringifyMe !== null) {
+    return '{' + '}';
   }
   else {
     return `${stringifyMe}`;
