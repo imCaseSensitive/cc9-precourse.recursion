@@ -10,6 +10,9 @@ const stringifyJSON = (stringifyMe) => {
   if (stringifyMe === null) {
     return 'null';
   }
+  else if( stringifyMe === undefined) {
+    return 'undefined';
+  }
   else if (typeof stringifyMe === "string") {
     return  `"${stringifyMe}"`;
   }
@@ -21,7 +24,12 @@ const stringifyJSON = (stringifyMe) => {
     return '[' + stringifiedArray.join(',') + ']';
   }
   else if (stringifyMe.constructor === Object && stringifyMe !== null) {
-    return '{' + '}';
+    let arrayOfKeys = Object.keys(stringifyMe);
+    let result = [];
+    for (let i = 0; i < arrayOfKeys.length; i++) {
+      result.push(stringifyJSON(arrayOfKeys[i]) + ':' + stringifyJSON(stringifyMe[arrayOfKeys[i]]));
+    }
+    return '{' + result.join(',') + '}';
   }
   else {
     return `${stringifyMe}`;
