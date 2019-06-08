@@ -24,8 +24,19 @@ const stringifyJSON = (stringifyMe) => {
     return '[' + stringifiedArray.join(',') + ']';
   }
   else if (stringifyMe.constructor === Object && stringifyMe !== null) {
-    let arrayOfKeys = Object.keys(stringifyMe);
+    let arrayOfKeys = {};
     let result = [];
+    let validator = true;
+
+    for (const key in stringifyMe) {
+      if (typeof stringifyMe[key] === 'function' || typeof stringifyMe[key] === 'undefined') {
+        validator = false;
+      }
+    }
+    if (validator === true) {
+      arrayOfKeys = Object.keys(stringifyMe);
+    }
+  
     for (let i = 0; i < arrayOfKeys.length; i++) {
       result.push(stringifyJSON(arrayOfKeys[i]) + ':' + stringifyJSON(stringifyMe[arrayOfKeys[i]]));
     }
