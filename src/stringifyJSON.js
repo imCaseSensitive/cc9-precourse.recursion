@@ -10,8 +10,11 @@ const stringifyJSON = (stringifyMe) => {
   if (stringifyMe === null) {
     return 'null';
   }
-  else if( stringifyMe === undefined) {
+  else if (stringifyMe === undefined) {
     return 'undefined';
+  }
+  else if (stringifyMe instanceof Date) {
+    return '"' + stringifyMe.toJSON() + '"';
   }
   else if (typeof stringifyMe === "string") {
     return  `"${stringifyMe}"`;
