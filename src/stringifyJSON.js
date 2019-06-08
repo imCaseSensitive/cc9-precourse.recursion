@@ -6,6 +6,6 @@ What does the output for stringifyJSON look like? Play around with JSON.stringif
 
 */
 
-const stringifyJSON = () => {
-  // YOUR CODE HERE
+const stringifyJSON = (value) => {
+  return `${value}`;
 };
