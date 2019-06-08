@@ -6,6 +6,12 @@ What does the output for stringifyJSON look like? Play around with JSON.stringif
 
 */
 
-const stringifyJSON = (value) => {
-  return `${value}`;
+const stringifyJSON = (object) => {
+  if (typeof object === "string") {
+    return  `"${object}"`;
+  }
+  if (Array.isArray(object) === true) {
+    return '[' + ']';
+  }
+  return `${object}`;
 };
